@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>GuessSketch - Join</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="join-body">
+
+  <div class="join-container">
+
+    <div class="join-logo">
+      <img src="images/Logo.png" alt="GuessSketch Logo" class="join-logo-img" />
+      <h1>GuessSketch</h1>
+    </div>
+
+    <p class="tagline">Draw, guess, and play with friends in real time.</p>
+
+    <div class="join-box">
+
+      <div class="input-wrap">
+        <span class="input-icon">👤</span>
+        <input
+          type="text"
+          id="playerName"
+          placeholder="Your name"
+          maxlength="20"
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="input-wrap">
+        <span class="input-icon">🔑</span>
+        <input
+          type="text"
+          id="roomCode"
+          placeholder="Room code"
+          maxlength="10"
+          autocomplete="off"
+        />
+      </div>
+
+      <button class="join-btn" onclick="joinGame()">Join Game →</button>
+
+      <button class="join-btn random-btn" onclick="joinRandomRoom()">Join Random Room</button>
+    </div>
+
+    <p id="joinError" class="join-error"></p>
+
+    <p class="hint">Try room code <span>1234</span> to get started</p>
+
+  </div>
+
+  <script>
+    function joinGame() {
+      const playerName = document.getElementById("playerName").value.trim();
+      const roomCode = document.getElementById("roomCode").value.trim();
+
+      if (!playerName || !roomCode) {
+        alert("Please enter both your name and a room code.");
+        return;
+      }
+
+      localStorage.setItem("playerName", playerName);
+      localStorage.setItem("roomCode", roomCode);
+
+      window.location.href = "game.html";
+    }
+
+    async function joinRandomRoom() {
+      const playerName = document.getElementById("playerName").value.trim();
+      const joinError = document.getElementById("joinError");
+
+      joinError.textContent = "";
+
+      if (!playerName) {
+        alert("Please enter your name.");
+        return;
+      }
+
+      try {
+        const response = await fetch("/random-room");
+        const data = await response.json();
+
+        if (!data.success) {
+          joinError.textContent = "No rooms available.";
+          return;
+        }
+
+        localStorage.setItem("playerName", playerName);
+        localStorage.setItem("roomCode", data.roomCode);
+
+        window.location.href = "game.html";
+      } catch (error) {
+        joinError.textContent = "Something went wrong. Try again.";
+      }
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") joinGame();
+    });
+  </script>
+
+</body>
+</html>

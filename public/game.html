@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GuessSketch - Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="game-body">
+
+  <header class="game-header">
+    <div class="header-brand">
+      <img src="images/Logo.png" alt="GuessSketch Logo" class="game-logo" />
+      <div>
+        <h2>GuessSketch</h2>
+        <span id="roomInfo">Room: ——</span>
+      </div>
+    </div>
+
+    <div class="turn-info">
+      <h3 id="turnText">Waiting for players…</h3>
+      <p id="wordText">Word: ——</p>
+    </div>
+
+    <div class="header-right">
+      <div id="timerDisplay" class="timer-display">⏱ 60s</div>
+      <button class="mute-btn" id="muteBtn">🔊 Music</button>
+      <button class="leave-btn" id="leaveBtn">🚪 Leave</button>
+    </div>
+  </header>
+
+  <main class="game-layout">
+
+    <section class="players-panel">
+      <p class="panel-title">🏆 Leaderboard</p>
+      <ul id="playersList"></ul>
+    </section>
+
+    <section class="canvas-panel">
+      <div class="tools">
+        <div class="tool-group">
+          <span class="tool-label">Color</span>
+          <input type="color" id="colorPicker" value="#000000" title="Pick color" />
+        </div>
+        <div class="tool-group">
+          <span class="tool-label">Size</span>
+          <input type="range" id="brushSize" min="2" max="20" value="4" />
+        </div>
+        <button class="clear-btn" id="clearBtn">🗑 Clear</button>
+      </div>
+      <canvas id="drawingCanvas"></canvas>
+    </section>
+
+    <section class="chat-panel">
+      <p class="panel-title">Chat / Guess</p>
+      <div id="chatMessages" class="chat-messages"></div>
+      <div class="chat-input-box">
+        <input
+          type="text"
+          id="chatInput"
+          placeholder="Type your guess…"
+          autocomplete="off"
+        />
+        <button class="send-btn" id="sendBtn">Send</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="game.js"></script>
+
+</body>
+</html>

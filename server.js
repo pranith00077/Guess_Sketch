@@ -61,26 +61,7 @@ const words = [
   // ── Anime characters ──
   "Naruto", "Sasuke", "Sakura", "Kakashi", "Goku", "Vegeta", "Gohan",
   "Piccolo", "Luffy", "Zoro", "Nami", "Sanji", "Usopp", "Robin",
-  "Ichigo", "Rukia", "Orihime", "Aizen", "Edward Elric", "Alphonse Elric",
-  "Roy Mustang", "Winry", "Mikasa", "Eren", "Armin", "Levi", "Historia",
-  "Gojo", "Itadori", "Megumi", "Nobara", "Sukuna", "Light Yagami",
-  "L Lawliet", "Ryuk", "Tanjiro", "Nezuko", "Zenitsu", "Inosuke", "Muzan",
-  "Giyu", "Shinobu", "Rengoku", "Killua", "Gon", "Hisoka", "Kurapika",
-  "Leorio", "Meruem", "Spike Spiegel", "Gintoki", "Saitama", "Genos",
-  "All Might", "Deku", "Bakugo", "Todoroki", "Uraraka", "Aizawa",
-  "Sailor Moon", "Vegeta", "Bulma", "Krillin", "Android 18", "Frieza",
-  "Cell", "Majin Buu", "Broly", "Jiren", "Rem", "Emilia", "Subaru",
-  "Asuna", "Kirito", "Leafa", "Sinon", "Yui", "Natsu", "Lucy", "Erza",
-  "Gray", "Happy", "Zeref", "Mavis", "Inuyasha", "Kagome", "Sesshomaru",
-  "Miroku", "Sango", "Totoro", "Spirited Away", "Howl", "Calcifer",
-  "Conan Edogawa", "Shinichi", "Ran", "Heiji", "Kaito Kid", "Lupin III",
-  "Jotaro", "Dio", "Giorno", "Jolyne", "Rohan", "Joseph Joestar",
-  "Nami", "Boa Hancock", "Whitebeard", "Shanks", "Ace", "Sabo",
-  "Kaido", "Big Mom", "Blackbeard", "Trafalgar Law", "Chopper",
-  "Zero Two", "Hiro", "Ichika", "Naofumi", "Raphtalia", "Filo",
-  "Rimuru", "Shuna", "Milim", "Benimaru", "Ainz Ooal Gown", "Albedo",
-  "Shalltear", "Demiurge", "Cocytus", "Koneko", "Rias", "Issei",
-  "Aqua", "Kazuma", "Darkness", "Megumin", "Yugi Moto", "Kaiba",
+  
  
   // ── Famous places ──
   "Eiffel Tower", "Big Ben", "Colosseum", "Statue of Liberty", "Great Wall",
@@ -97,17 +78,7 @@ const words = [
   "Hollywood", "Las Vegas", "Broadway", "Wall Street",
  
   // ── Countries ──
-  "Afghanistan", "Albania", "Algeria", "Argentina", "Australia", "Austria",
-  "Bangladesh", "Belgium", "Bolivia", "Brazil", "Canada", "Chile", "China",
-  "Colombia", "Croatia", "Cuba", "Czech Republic", "Denmark", "Ecuador",
-  "Egypt", "Ethiopia", "Finland", "France", "Germany", "Ghana", "Greece",
-  "Hungary", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel",
-  "Italy", "Jamaica", "Japan", "Jordan", "Kenya", "Mexico", "Mongolia",
-  "Morocco", "Nepal", "Netherlands", "New Zealand", "Nigeria", "Norway",
-  "Pakistan", "Peru", "Philippines", "Poland", "Portugal", "Romania",
-  "Russia", "Saudi Arabia", "South Africa", "South Korea", "Spain",
-  "Sri Lanka", "Sweden", "Switzerland", "Thailand", "Turkey", "Ukraine",
-  "United Kingdom", "United States", "Venezuela", "Vietnam", "Zimbabwe",
+ 
  
   // ── Continents ──
   "Africa", "Antarctica", "Asia", "Australia", "Europe",

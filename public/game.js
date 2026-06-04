@@ -42,11 +42,20 @@ ctx.lineCap  = "round";
 ctx.lineJoin = "round";
 
 function resizeCanvas() {
-  const rect      = canvas.getBoundingClientRect();
-  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const rect = canvas.getBoundingClientRect();
+  // Save current drawing as an image so we can restore it after resize
+  const tempCanvas = document.createElement("canvas");
+  tempCanvas.width  = canvas.width;
+  tempCanvas.height = canvas.height;
+  tempCanvas.getContext("2d").drawImage(canvas, 0, 0);
+
+  // Set the canvas pixel size to match its CSS size (no DPR scaling needed for
+  // cross-device consistency — we normalise coordinates instead)
   canvas.width  = rect.width;
   canvas.height = rect.height;
-  ctx.putImageData(imageData, 0, 0);
+
+  // Restore drawing
+  ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
   ctx.lineCap  = "round";
   ctx.lineJoin = "round";
 }
@@ -64,11 +73,18 @@ function getCanvasPosition(event) {
 }
 
 function drawLine(data) {
+  // Support both normalized (0-1) and legacy absolute coords
+  const w = canvas.width;
+  const h = canvas.height;
+  const x1 = data.normPrev ? data.prevX * w : data.prevX;
+  const y1 = data.normPrev ? data.prevY * h : data.prevY;
+  const x2 = data.norm     ? data.x     * w : data.x;
+  const y2 = data.norm     ? data.y     * h : data.y;
   ctx.strokeStyle = data.color;
   ctx.lineWidth   = data.size;
   ctx.beginPath();
-  ctx.moveTo(data.prevX, data.prevY);
-  ctx.lineTo(data.x, data.y);
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
   ctx.stroke();
 }
 
@@ -88,9 +104,15 @@ function drawing(event) {
   event.preventDefault();
 
   const pos = getCanvasPosition(event);
+  const w = canvas.width;
+  const h = canvas.height;
   const drawData = {
-    prevX: lastX, prevY: lastY,
-    x: pos.x, y: pos.y,
+    // Absolute coords for local rendering
+    prevX: lastX,   prevY: lastY,
+    x:     pos.x,   y:     pos.y,
+    // Normalized coords for remote rendering (0–1 range)
+    normPrevX: lastX / w, normPrevY: lastY / h,
+    normX:     pos.x / w, normY:     pos.y / h,
     color: currentColor,
     size:  currentBrushSize,
   };
@@ -414,7 +436,20 @@ socket.on("timer-update", ({ timeLeft }) => {
   updateTimerDisplay(timeLeft);
 });
 
-socket.on("draw",         (data) => { drawLine(data); });
+socket.on("draw", (data) => {
+  // Remap normalized coords to this device's canvas size
+  const w = canvas.width;
+  const h = canvas.height;
+  const remapped = {
+    prevX: data.normPrevX * w,
+    prevY: data.normPrevY * h,
+    x:     data.normX     * w,
+    y:     data.normY     * h,
+    color: data.color,
+    size:  data.size,
+  };
+  drawLine(remapped);
+});
 socket.on("clear-canvas", ()     => { clearCanvas();  });
 
 socket.on("chat-message", ({ name, message }) => {

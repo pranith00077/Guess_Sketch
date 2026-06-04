@@ -298,9 +298,12 @@ body {
   font-weight: 700;
   color: var(--accent3);
   font-family: 'Space Mono', monospace;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* Allow long words to wrap instead of being clipped */
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  overflow: visible;
+  line-height: 1.4;
   margin-top: 2px;
 }
 
@@ -603,7 +606,7 @@ body {
   .player-badge  { max-width: 72px; font-size: 12px; }
   .player-avatar { width: 28px; height: 28px; font-size: 11px; }
 
-  .turn-info { order: 3; width: 100%; text-align: left; }
+  .turn-info { order: 3; width: 100%; text-align: left; min-width: 0; overflow: visible; }
 
   .game-layout {
     grid-template-columns: 1fr;
